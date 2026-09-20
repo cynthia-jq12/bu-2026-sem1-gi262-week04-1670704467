@@ -422,11 +422,21 @@ MonoBehaviour:
   as09ItemName: shield
   as09Quantity: 2
   as10EventQueue:
-    values: []
+    values:
+    - eventType: enemy
+      name: Goblin appeared
+      priority: 3
+    - eventType: power up
+      name: Health boost found
+      priority: 2
   as11PlayerStats:
-    entries: []
-  as11StatName: 
-  as11Value: 0
+    entries:
+    - key: Kill
+      value: 10
+    - key: deaths
+      value: 2
+  as11StatName: assists
+  as11Value: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
