@@ -14,10 +14,10 @@ namespace Assignment
             // AS05_FindMiddleElement();
             // AS06_MergeDictionaries();
             // AS07_RemoveDuplicatesFromLinkedList();
-             AS08_TopFrequentNumber();
+            // AS08_TopFrequentNumber();
             // AS09_PlayerInventory();
             // AS10_GameEventQueue();
-            // AS11_PlayerStatsTracker();
+             AS11_PlayerStatsTracker();
         }
 
         #region Assignment
@@ -269,7 +269,7 @@ namespace Assignment
 
             Dictionary<int, int> freq = new Dictionary<int, int>();
             
-            for (int i = 0; i < numbers.Length, i++)
+            for (int i = 0; i < numbers.Length; i++)
             {
                 int n = numbers[i];
                 if (freq.ContainsKey(n))
@@ -307,7 +307,20 @@ namespace Assignment
             Dictionary<string, int> inventory = as09Inventory.GetDictionary();
             string itemName = as09ItemName;
             int quantity = as09Quantity;
-            throw new System.NotImplementedException();
+            
+            if (inventory.ContainsKey(itemName))
+            {
+                inventory[itemName] += quantity;
+            }
+            else
+            {
+                inventory.Add(itemName, quantity);
+            }
+
+            foreach (KeyValuePair<string, int> kvp in inventory)
+            {
+                Debug.Log($"{kvp.Key}: {kvp.Value}");
+            }
         }
 
         [Header("AS10 - Game Event Queue")]
@@ -316,7 +329,33 @@ namespace Assignment
         public void AS10_GameEventQueue()
         {
             LinkedList<GameEvent> eventQueue = as10EventQueue.GetLinkedList();
-            throw new System.NotImplementedException();
+            if (eventQueue.Count == 0)
+            {
+                Debug.Log("Event queue is empty");
+                return;
+            }
+
+            while (eventQueue.Count > 0)
+            {
+                GameEvent currentEvent = eventQueue.First.Value;
+                eventQueue.RemoveFirst();
+
+                Debug.Log($"Processing event: {currentEvent.Name}");
+                Debug.Log($"Remaining events in queue: {eventQueue.Count}");
+
+                if (currentEvent.EventType == "empty")
+                {
+                  Debug.Log($"Enemy event processed - {currentEvent.Name}");
+                }
+                else if (currentEvent.EventType == "powerup")
+                {
+                    Debug.Log($"Power-up event processed - {currentEvent.Name}");
+                }
+                else if (currentEvent.EventType == "levelup")
+                {
+                    Debug.Log($"Level up event processed - {currentEvent.Name}");
+                }
+            }
         }
 
         [Header("AS11 - Player Stats Tracker")]
@@ -329,7 +368,23 @@ namespace Assignment
             Dictionary<string, int> playerStats = as11PlayerStats.GetDictionary();
             string statName = as11StatName;
             int value = as11Value;
-            throw new System.NotImplementedException();
+            
+            if (playerStats.ContainsKey(statName))
+            {
+                playerStats[statName] += value;
+            }
+            else
+            {
+                playerStats.Add(statName, value);
+            }
+
+            Debug.Log($"Updated {statName}: {playerStats[statName]}");
+            Debug.Log("Current player statistics:");
+
+            foreach (KeyValuePair<string, int> kvp in playerStats)
+            {
+                Debug.Log($"{kvp.Key}: {kvp.Value}");
+            }
         }
 
         #endregion

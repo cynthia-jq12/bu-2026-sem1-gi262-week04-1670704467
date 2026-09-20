@@ -411,12 +411,16 @@ MonoBehaviour:
     - key: cherry
       value: 4
   as07List:
-    values: 
-  as08Numbers: 
+    values: 01000000020000000200000003000000030000000400000005000000
+  as08Numbers: 010000000200000003000000020000000200000001000000
   as09Inventory:
-    entries: []
-  as09ItemName: 
-  as09Quantity: 0
+    entries:
+    - key: sword
+      value: 1
+    - key: potion
+      value: 5
+  as09ItemName: shield
+  as09Quantity: 2
   as10EventQueue:
     values: []
   as11PlayerStats:
