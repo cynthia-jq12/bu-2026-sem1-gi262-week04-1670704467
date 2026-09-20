@@ -7,9 +7,9 @@ namespace Assignment
     {
         public void Start()
         {
-            // AS01_CountWords();
-            // AS02_CountNumber();
-            // AS03_CheckValidBrackets();
+             AS01_CountWords();
+             AS02_CountNumber();
+             AS03_CheckValidBrackets();
             // AS04_PrintReverseLinkedList();
             // AS05_FindMiddleElement();
             // AS06_MergeDictionaries();
@@ -28,7 +28,32 @@ namespace Assignment
         public void AS01_CountWords()
         {
             string[] words = as01Words;
-            throw new System.NotImplementedException();
+            if (words == null || words.Length == 0) return;
+
+            Dictionary<string, int> wordCount = new Dictionary<string, int>();
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                string currentWord = words[i];
+                if (wordCount.ContainsKey(currentWord))
+                {
+                    wordCount[currentWord]++;
+                }
+                else
+                {
+                    wordCount.Add(currentWord, 1);
+                }
+            }
+
+            string[] keys = new string[wordCount.Count];
+            int[] values = new int[wordCount.Count];
+            wordCount.Keys.CopyTo(keys, 0);
+            wordCount.Values.CopyTo(values, 0);
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                Debug.Log($"word: '{keys[i]}' count: {values[i]}");
+            }
         }
 
         [Header("AS02 - Count Number")]
@@ -37,7 +62,32 @@ namespace Assignment
         public void AS02_CountNumber()
         {
             int[] numbers = as02Numbers;
-            throw new System.NotImplementedException();
+            if (numbers == null || numbers.Length == 0) return;
+
+            Dictionary<int, int> numCount = new Dictionary<int, int>();
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                int currentNumber = numbers[i];
+                if (numCount.ContainsKey(currentNumber))
+                {
+                    numCount[currentNumber]++;
+                }
+                else
+                {
+                    numCount.Add(currentNumber, 1);
+                }
+            }
+
+            int[] keys = new int[numCount.Count];
+            int[] values = new int[numCount.Count];
+            numCount.Keys.CopyTo(keys, 0);
+            numCount.Values.CopyTo(values, 0);
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                Debug.Log($"number: {keys[i]} count: {values[i]}");
+            }
         }
 
         [Header("AS03 - Check Valid Brackets")]
@@ -45,8 +95,52 @@ namespace Assignment
 
         public void AS03_CheckValidBrackets()
         {
-            string input = as03Input;
-            throw new System.NotImplementedException();
+            string input = as03Input ?? "";
+
+            Dictionary<char, char> pairs = new Dictionary<char, char>()
+            {
+                { '(', ')' },
+                { '[', ']' },
+                { '{', '}' }
+            };
+
+            LinkedList<char> stack = new LinkedList<char>();
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                char c = input[i];
+
+                if (pairs.ContainsKey(c))
+                {
+                    stack.AddLast(c);
+                }
+                else if (pairs.ContainsValue(c))
+                {
+                    if (stack.Count == 0)
+                    {
+                        Debug.Log("Invalid");
+                        return;
+                    }
+
+                    char lastOpen = stack.Last.Value;
+                    if (pairs[lastOpen] != c)
+                    {
+                        Debug.Log("Invalid");
+                        return;
+                    }
+
+                    stack.RemoveLast();
+                }
+            }
+
+            if (stack.Count == 0)
+            {
+                Debug.Log("Valid");
+            }
+            else
+            {
+                Debug.Log("Invalid");
+            }
         }
 
         [Header("AS04 - Print Reverse Linked List")]
